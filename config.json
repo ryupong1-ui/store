@@ -40,6 +40,18 @@
       "featured": true,
       "buyUrl": "https://line.me/S/sticker/36700308/?lang=en&utm_source=gnsh_stickerDetail",
       "contactUrl": "mailto:store@ryuxp.online"
+    },
+    {
+      "id": "mena",
+      "name": "RYU XP | My Cat sticker v.2",
+      "description": "Create by Ryu XP",
+      "image": "/images/cat2.PNG",
+      "price": "฿35",
+      "stickers": 40,
+      "status": "coming-soon",
+      "featured": true,
+      "buyUrl": "",
+      "contactUrl": "mailto:store@ryuxp.online"
     }
   ]
 }
