@@ -1,0 +1,45 @@
+{
+  "brand": {
+    "name": "LINE Sticker by Ryu XP",
+    "year": 2026,
+    "contactUrl": "mailto:store@ryuxp.online"
+  },
+  "products": [
+    {
+      "id": "My-Cat",
+      "name": "Ryu XP | My Cat stickers v.1",
+      "description": "Create by : Ryu XP",
+      "image": "/images/mycat.PNG",
+      "price": "฿35",
+      "stickers": 16,
+      "status": "coming-soon",
+      "featured": true,
+      "buyUrl": "https://store.line.me/",
+      "contactUrl": "mailto:store@ryuxp.online"
+    },
+    {
+      "id": "SPG",
+      "name": "SPG Sticker by Ryu XP",
+      "description": "Create by Ryu XP | Ryu XP X Speedgas",
+      "image": "/images/spg.PNG",
+      "price": "฿35",
+      "stickers": 8,
+      "status": "available",
+      "featured": true,
+      "buyUrl": "https://store.line.me/stickershop/product/36085234/en",
+      "contactUrl": "mailto:store@ryuxp.online"
+    },
+    {
+      "id": "dog",
+      "name": "RYU XP | Sticker Line By Pets",
+      "description": "Create by Ryu XP",
+      "image": "/images/dog.PNG",
+      "price": "฿35",
+      "stickers": 8,
+      "status": "available",
+      "featured": true,
+      "buyUrl": "https://store.line.me/stickershop/product/36700308/en",
+      "contactUrl": "mailto:store@ryuxp.online"
+    }
+  ]
+}

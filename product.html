@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Ryu XP | Store</title>
+<meta name="description" content="Explore LINE Sticker collections by Ryu XP">
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#171717;background:#fff}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+.container{width:min(1160px,calc(100% - 40px));margin:auto}
+.site-header{height:76px;border-bottom:1px solid #eee;background:rgba(255,255,255,.9);backdrop-filter:blur(18px);position:sticky;top:0;z-index:10}
+.navbar{height:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;font-weight:600;font-size:15px}
+.brand strong{font-weight:800}
+.brand-icon{width:35px;height:35px;border-radius:12px;background:#111;color:white;display:grid;place-items:center;font-weight:800}
+.nav-links{display:flex;gap:30px;font-size:14px;color:#777}
+.nav-links a.active,.nav-links a:hover{color:#111}
+.nav-cta{background:#111;color:white;padding:13px 20px;border-radius:12px;font-size:13px;font-weight:650}
+.store-hero{padding:85px 0 55px;background:linear-gradient(180deg,#fafafa,#fff)}
+.section-eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;color:#888}
+.store-hero h1{font-size:clamp(48px,7vw,75px);letter-spacing:-4px;margin:18px 0}
+.store-hero h1 span{color:#999}
+.store-hero p{color:#777;line-height:1.8;font-size:14px}
+.store-search{margin-top:28px;width:min(450px,100%);height:50px;border:1px solid #e7e7e7;border-radius:13px;display:flex;align-items:center;gap:12px;padding:0 16px;background:white}
+.store-search span{font-size:23px;color:#888}
+.store-search input{border:0;outline:0;width:100%;font-size:14px;background:transparent}
+.store-products-section{padding:35px 0 100px}
+.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:28px}
+.section-heading h2{font-size:34px;letter-spacing:-1.5px;margin:10px 0}
+#product-count{font-size:12px;color:#999}
+.products-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.product-card{border:1px solid #eee;border-radius:20px;overflow:hidden;transition:.25s;background:white}
+.product-card:hover{transform:translateY(-5px);box-shadow:0 15px 40px #0000000b}
+.product-card-button{display:block;border:0;background:transparent;text-align:left;padding:0;width:100%;cursor:pointer;color:inherit}
+.product-card-image{height:245px;background:#f6f6f6;display:grid;place-items:center;overflow:hidden}
+.product-card-image img{width:100%;height:100%;object-fit:contain}
+.product-card-info{padding:20px}
+.product-card-info h3{margin:12px 0 7px;font-size:19px}
+.product-card-info p{margin:0;color:#777;font-size:14px}
+.product-card-more{display:block;margin-top:18px;font-size:12px;font-weight:700}
+.product-status{display:inline-block;font-size:10px;font-weight:750;letter-spacing:.7px;color:#16834a;background:#e9f8ef;padding:6px 9px;border-radius:20px}
+.product-status.coming-soon{color:#9a6a12;background:#fff5dc}
+.empty-products{text-align:center;padding:60px 15px;color:#888}
+.site-footer{border-top:1px solid #eee;padding:30px 0}
+.footer-content{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.footer-content p,.footer-content>a:last-child{font-size:12px;color:#888}
+
+/* PRODUCT POPUP */
+.product-modal{position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;padding:20px;visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
+.product-modal.active{visibility:visible;opacity:1}
+.modal-backdrop{position:absolute;inset:0;background:rgba(10,12,20,.65);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.modal-content{position:relative;z-index:1;width:min(850px,100%);max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.97);border:1px solid #ffffff80;border-radius:27px;box-shadow:0 30px 100px #0005;transform:translateY(25px) scale(.97);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.product-modal.active .modal-content{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;z-index:5;top:13px;right:13px;width:38px;height:38px;border:0;border-radius:50%;background:#eee;color:#222;font-size:25px;cursor:pointer}
+.modal-image{min-height:360px;background:#f5f5f5;display:grid;place-items:center;overflow:hidden}
+.modal-image img{width:100%;height:100%;max-height:550px;object-fit:contain}
+.modal-info{padding:42px;display:flex;flex-direction:column;justify-content:center}
+.modal-info h2{font-size:34px;letter-spacing:-1px;margin:16px 0 10px}
+.modal-description{color:#777;line-height:1.8;font-size:14px}
+.modal-meta{display:flex;gap:35px;padding:20px 0;margin:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee}
+.modal-meta div{display:flex;flex-direction:column;gap:6px}
+.modal-meta span{font-size:12px;color:#888}
+.modal-meta strong{font-size:17px}
+.modal-actions{display:flex;flex-direction:column;gap:10px}
+.modal-button{width:100%;min-height:50px;padding:0 18px;border-radius:13px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:650;cursor:pointer;transition:.2s;text-decoration:none}
+.modal-button:hover{transform:translateY(-2px)}
+.buy-button{background:#111;color:#fff;border:1px solid #111}
+.share-button{background:#f2f2f2;color:#222;border:1px solid #e7e7e7}
+.contact-button{background:white;color:#222;border:1px solid #ddd}
+.modal-toast{min-height:20px;margin-top:12px;color:#16834a;font-size:12px;opacity:0;transition:.2s}
+.modal-toast.show{opacity:1}
+body.modal-open{overflow:hidden}
+[hidden]{display:none!important}
+
+@media(max-width:700px){
+.container{width:calc(100% - 32px)}
+.site-header{height:66px}
+.nav-links{gap:14px;font-size:12px}
+.nav-cta{display:none}
+.store-hero{padding:60px 0 40px}
+.store-hero h1{font-size:52px;letter-spacing:-3px}
+.products-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.product-card-image{height:155px}
+.product-card-info{padding:13px}
+.product-card-info h3{font-size:16px}
+.section-heading h2{font-size:27px}
+.product-modal{padding:12px}
+.modal-content{grid-template-columns:1fr;max-height:92vh;border-radius:22px}
+.modal-image{min-height:0;height:230px}
+.modal-image img{max-height:230px}
+.modal-info{padding:23px}
+.modal-info h2{font-size:27px}
+.modal-meta{gap:45px}
+.footer-content{flex-wrap:wrap}
+.footer-content p{order:3;width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container navbar">
+    <a href="/" class="brand">
+      <span class="brand-icon">R</span>
+      <span>LINE Sticker <strong>by Ryu XP</strong></span>
+    </a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/product" class="active">Store</a>
+    </nav>
+    <a href="/" class="nav-cta">Back Home ↗</a>
+  </div>
+</header>
+
+<main>
+<section class="store-hero">
+  <div class="container">
+    <span class="section-eyebrow">RYU XP COLLECTION</span>
+    <h1>Sticker Store<span>.</span></h1>
+    <p>Find your favorite stickers and make every conversation more special.</p>
+
+    <label class="store-search">
+      <span>⌕</span>
+      <input id="search" type="search" placeholder="Search stickers..." autocomplete="off">
+    </label>
+  </div>
+</section>
+
+<section class="store-products-section">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <span class="section-eyebrow">ALL COLLECTIONS</span>
+        <h2>Our Stickers.</h2>
+      </div>
+      <span id="product-count">Loading...</span>
+    </div>
+
+    <div class="products-grid" id="products-grid"></div>
+
+    <div class="empty-products" id="empty-products" hidden>
+      <h3>No stickers found</h3>
+      <p>Try searching with another keyword.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-content">
+    <a href="/" class="brand"><span class="brand-icon">R</span><span>LINE Sticker <strong>by Ryu XP</strong></span></a>
+    <p>© <span id="year"></span> Ryu XP. All rights reserved.</p>
+    <a href="/">Home ↗</a>
+  </div>
+</footer>
+
+<!-- PRODUCT MODAL -->
+<div class="product-modal" id="product-modal" aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+
+  <section class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+    <button class="modal-close" type="button" data-close aria-label="Close">×</button>
+
+    <div class="modal-image">
+      <img id="modal-image" src="" alt="">
+    </div>
+
+    <div class="modal-info">
+      <span class="product-status" id="modal-status"></span>
+      <h2 id="modal-name"></h2>
+      <p class="modal-description" id="modal-description"></p>
+
+      <div class="modal-meta">
+        <div><span>Sticker Count</span><strong id="modal-stickers"></strong></div>
+        <div><span>Price</span><strong id="modal-price"></strong></div>
+      </div>
+
+      <div class="modal-actions">
+        <a class="modal-button buy-button" id="modal-buy" href="#" target="_blank" rel="noopener noreferrer">
+          <span>ซื้อสินค้า</span><span>↗</span>
+        </a>
+
+        <button class="modal-button share-button" id="modal-share" type="button">
+          <span>แชร์ลิงก์สินค้า</span><span>↗</span>
+        </button>
+
+        <a class="modal-button contact-button" id="modal-contact" href="#" target="_blank" rel="noopener noreferrer">
+          <span>ติดต่อสอบถาม</span><span>↗</span>
+        </a>
+      </div>
+
+      <div class="modal-toast" id="modal-toast" role="status"></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const $ = selector => document.querySelector(selector);
+
+  let products = [];
+  let config = {};
+  let currentProduct = null;
+  let lastFocusedElement = null;
+
+  const grid = $("#products-grid");
+  const modal = $("#product-modal");
+
+  function escapeHTML(value = "") {
+    return String(value).replace(/[&<>"']/g, c => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    })[c]);
+  }
+
+  function safeURL(value, fallback = "#") {
+    try {
+      const url = new URL(value, location.origin);
+      return ["https:", "http:"].includes(url.protocol) ? url.href : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  function productURL(product) {
+    return `${location.origin}/product#${encodeURIComponent(product.id)}`;
+  }
+
+  function renderProducts(keyword = "") {
+    const filtered = products.filter(p => {
+      const text = `${p.name} ${p.description} ${p.id}`.toLowerCase();
+      return text.includes(keyword.toLowerCase());
+    });
+
+    $("#product-count").textContent = `${filtered.length} Products`;
+    $("#empty-products").hidden = filtered.length !== 0;
+
+    grid.innerHTML = filtered.map(p => `
+      <article class="product-card">
+        <button class="product-card-button" type="button" data-product="${escapeHTML(p.id)}">
+          <div class="product-card-image">
+            <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}" loading="lazy">
+          </div>
+          <div class="product-card-info">
+            <span class="product-status ${p.status === "coming-soon" ? "coming-soon" : ""}">
+              ${p.status === "available" ? "Available" : "Coming Soon"}
+            </span>
+            <h3>${escapeHTML(p.name)}</h3>
+            <p>${escapeHTML(p.price)}</p>
+            <span class="product-card-more">ดูรายละเอียด ↗</span>
+          </div>
+        </button>
+      </article>
+    `).join("");
+  }
+
+  function openProduct(id, updateURL = true) {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+
+    currentProduct = product;
+    lastFocusedElement = document.activeElement;
+
+    $("#modal-image").src = product.image;
+    $("#modal-image").alt = product.name;
+    $("#modal-name").textContent = product.name;
+    $("#modal-description").textContent = product.description || "";
+    $("#modal-stickers").textContent = `${product.stickers || 0} ภาพ`;
+    $("#modal-price").textContent = product.price || "สอบถามราคา";
+
+    const status = $("#modal-status");
+    status.textContent = product.status === "available" ? "Available" : "Coming Soon";
+    status.className = "product-status" + (product.status === "coming-soon" ? " coming-soon" : "");
+
+    const buy = $("#modal-buy");
+    buy.href = safeURL(product.buyUrl);
+    buy.hidden = product.status !== "available" || !product.buyUrl;
+
+    const contact = $("#modal-contact");
+    contact.href = safeURL(product.contactUrl || config.brand?.contactUrl);
+
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    $(".modal-close").focus();
+
+    if (updateURL) {
+      history.pushState({product:id}, "", `/product#${encodeURIComponent(id)}`);
+    }
+  }
+
+  function closeProduct(updateURL = true) {
+    if (!modal.classList.contains("active")) return;
+
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+
+    if (updateURL && location.hash) {
+      history.pushState({}, "", "/product");
+    }
+
+    if (lastFocusedElement) lastFocusedElement.focus();
+  }
+
+  function toast(message) {
+    const element = $("#modal-toast");
+    element.textContent = message;
+    element.classList.add("show");
+
+    clearTimeout(window.toastTimeout);
+    window.toastTimeout = setTimeout(() => {
+      element.classList.remove("show");
+    }, 2500);
+  }
+
+  async function shareProduct() {
+    if (!currentProduct) return;
+
+    const url = productURL(currentProduct);
+    const data = {
+      title: `${currentProduct.name} | ${config.brand?.name || "Ryu XP"}`,
+      text: currentProduct.description || currentProduct.name,
+      url
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(data);
+      } else {
+        await copyLink(url);
+      }
+    } catch(error) {
+      if (error.name !== "AbortError") {
+        await copyLink(url);
+      }
+    }
+  }
+
+  async function copyLink(url) {
+    try {
+      await navigator.clipboard.writeText(url);
+      toast("คัดลอกลิงก์สินค้าแล้ว");
+    } catch {
+      toast("ไม่สามารถคัดลอกลิงก์ได้");
+    }
+  }
+
+  async function init() {
+    $("#year").textContent = new Date().getFullYear();
+
+    try {
+      const response = await fetch("/config.json", {cache:"no-store"});
+      if (!response.ok) throw new Error("Cannot load config.json");
+
+      config = await response.json();
+      products = Array.isArray(config.products) ? config.products : [];
+
+      renderProducts();
+
+      const id = decodeURIComponent(location.hash.slice(1));
+      if (id) openProduct(id, false);
+
+    } catch(error) {
+      grid.innerHTML = "<p>ไม่สามารถโหลดสินค้าได้ กรุณาตรวจสอบ config.json</p>";
+      console.error(error);
+    }
+  }
+
+  grid.addEventListener("click", event => {
+    const button = event.target.closest("[data-product]");
+    if (button) openProduct(button.dataset.product);
+  });
+
+  $("#search").addEventListener("input", event => {
+    renderProducts(event.target.value.trim());
+  });
+
+  $("#modal-share").addEventListener("click", shareProduct);
+
+  document.addEventListener("click", event => {
+    if (event.target.closest("[data-close]")) closeProduct();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeProduct();
+  });
+
+  window.addEventListener("popstate", () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (id) openProduct(id, false);
+    else closeProduct(false);
+  });
+
+  init();
+})();
+</script>
+
+</body>
+</html>

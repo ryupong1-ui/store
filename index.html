@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Ryu XP | LINE Sticker</title>
+<meta name="description" content="Discover LINE stickers by Ryu XP">
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#171717;background:#fff}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.container{width:min(1160px,calc(100% - 40px));margin:auto}
+.site-header{height:76px;border-bottom:1px solid #eee;background:rgba(255,255,255,.88);backdrop-filter:blur(18px);position:sticky;top:0;z-index:10}
+.navbar{height:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;font-weight:600;font-size:15px}
+.brand strong{font-weight:800}
+.brand-icon{width:35px;height:35px;border-radius:12px;background:#111;color:white;display:grid;place-items:center;font-weight:800}
+.nav-links{display:flex;gap:30px;font-size:14px;color:#777}
+.nav-links a.active,.nav-links a:hover{color:#111}
+.nav-cta,.primary-button{background:#111;color:white;padding:13px 20px;border-radius:12px;font-size:13px;font-weight:650}
+.hero{padding:100px 0 110px;overflow:hidden}
+.hero-content{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:50px}
+.hero-label,.section-eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;color:#888}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#25b76a;margin-right:7px}
+.hero h1{font-size:clamp(55px,7vw,88px);line-height:.99;letter-spacing:-5px;margin:25px 0}
+.hero h1 span,.section-heading h2 span,.store-hero h1 span{color:#999}
+.hero-text>p,.about-content p{color:#777;line-height:1.9;max-width:460px;font-size:15px}
+.hero-actions{display:flex;align-items:center;gap:25px;margin-top:30px}
+.secondary-link,.text-link{font-size:13px;font-weight:650}
+.hero-note{font-size:12px;color:#999;margin-top:35px}
+.hero-visual{position:relative;min-height:420px;display:grid;place-items:center}
+.hero-glow{position:absolute;width:340px;height:340px;background:#e9eaff;border-radius:50%;filter:blur(55px)}
+.hero-image-card{position:relative;width:min(390px,100%);height:370px;border:1px solid #eee;border-radius:35px;background:linear-gradient(145deg,#fafafa,#f1f1f1);display:grid;place-items:center;overflow:hidden}
+.hero-image-card img{width:100%;height:100%;object-fit:contain;position:relative;z-index:1}
+.hero-image-placeholder{position:absolute;display:flex;flex-direction:column;align-items:center;gap:12px;color:#999;font-size:11px;letter-spacing:2px}
+.hero-image-placeholder span{font-size:65px;color:#bbb}
+.floating-label{position:absolute;background:white;border:1px solid #eee;padding:13px 17px;border-radius:14px;box-shadow:0 12px 35px #0000000d;font-size:12px;font-weight:650}
+.floating-one{top:65px;left:0}.floating-two{bottom:65px;right:0}
+.featured-section,.about-section{padding:80px 0}
+.section-heading{display:flex;align-items:end;justify-content:space-between;margin-bottom:35px}
+.section-heading h2,.about-content h2{font-size:40px;letter-spacing:-1.8px;margin:12px 0}
+.section-heading p{color:#888;font-size:14px}
+.view-all{font-size:13px;font-weight:650}
+.products-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.product-card{border:1px solid #eee;border-radius:20px;overflow:hidden;transition:.25s;background:white}
+.product-card:hover{transform:translateY(-5px);box-shadow:0 15px 40px #0000000b}
+.product-card-button{border:0;background:transparent;text-align:left;padding:0;width:100%;cursor:pointer;color:inherit}
+.product-card-image{height:240px;background:#f6f6f6;display:grid;place-items:center;overflow:hidden}
+.product-card-image img{width:100%;height:100%;object-fit:contain}
+.product-card-info{padding:20px}
+.product-card-info h3{margin:12px 0 7px;font-size:19px}
+.product-card-info p{margin:0;color:#777;font-size:14px}
+.product-card-more{display:block;margin-top:18px;font-size:12px;font-weight:700}
+.product-status{display:inline-block;font-size:10px;font-weight:750;letter-spacing:.7px;color:#16834a;background:#e9f8ef;padding:6px 9px;border-radius:20px}
+.product-status.coming-soon{color:#9a6a12;background:#fff5dc}
+.promo-section{padding:30px 0 80px}
+.promo{background:#111;color:white;padding:55px;border-radius:28px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.promo h2{font-size:42px;letter-spacing:-1.5px;margin:15px 0}
+.promo p{color:#aaa;font-size:14px}
+.promo-button{background:white;color:#111;padding:15px 20px;border-radius:12px;font-size:13px;font-weight:700;white-space:nowrap}
+.about-section{border-top:1px solid #eee}
+.about-content{max-width:700px}
+.about-content p{max-width:600px}
+.text-link{display:inline-block;margin-top:15px}
+.site-footer{border-top:1px solid #eee;padding:30px 0}
+.footer-content{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.footer-content p,.footer-content>a:last-child{font-size:12px;color:#888}
+@media(max-width:700px){
+.container{width:calc(100% - 32px)}
+.site-header{height:66px}
+.nav-links{gap:14px;font-size:12px}
+.nav-cta{display:none}
+.hero{padding:65px 0}
+.hero-content{grid-template-columns:1fr;gap:25px}
+.hero h1{font-size:62px;letter-spacing:-3px}
+.hero-visual{min-height:320px}
+.hero-image-card{height:290px;width:85%}
+.hero-glow{width:240px;height:240px}
+.products-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.product-card-image{height:155px}
+.product-card-info{padding:13px}
+.product-card-info h3{font-size:16px}
+.section-heading h2,.about-content h2{font-size:30px}
+.section-heading{align-items:start;gap:10px}
+.view-all{font-size:11px}
+.promo{padding:30px;display:block}
+.promo h2{font-size:34px}
+.promo-button{display:inline-block;margin-top:15px}
+.footer-content{flex-wrap:wrap}
+.footer-content p{order:3;width:100%}
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container navbar">
+    <a href="/" class="brand"><span class="brand-icon">R</span><span>LINE Sticker <strong>by Ryu XP</strong></span></a>
+    <nav class="nav-links">
+      <a href="/" class="active">Home</a>
+      <a href="/product">Store</a>
+    </nav>
+    <a href="/product" class="nav-cta">Explore Store ↗</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-text">
+      <span class="hero-label"><span class="status-dot"></span>CREATIVE LINE STICKERS</span>
+      <h1>Make every<br>chat <span>special.</span></h1>
+      <p>Discover adorable stickers designed to bring more personality, emotion and fun to every conversation.</p>
+      <div class="hero-actions">
+        <a href="/product" class="primary-button">Explore Stickers ↗</a>
+        <a href="#about" class="secondary-link">About Ryu XP</a>
+      </div>
+      <div class="hero-note">✦ Designed with creativity by Ryu XP</div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-glow"></div>
+      <div class="hero-image-card">
+        <img src="/images/hero-sticker.png" alt="Sticker collection" onerror="this.style.display='none'">
+        <div class="hero-image-placeholder"><span>✦</span><strong>STICKER COLLECTION</strong><small>LINE Sticker by Ryu XP</small></div>
+      </div>
+      <div class="floating-label floating-one">✦ Creative</div>
+      <div class="floating-label floating-two">Made with ♥</div>
+    </div>
+  </div>
+</section>
+
+<section class="featured-section">
+  <div class="container">
+    <div class="section-heading">
+      <div><span class="section-eyebrow">OUR COLLECTION</span><h2>Featured Stickers<span>.</span></h2><p>Discover our latest sticker collections.</p></div>
+      <a href="/product" class="view-all">View all stickers ↗</a>
+    </div>
+    <div class="products-grid" id="featured-products"></div>
+  </div>
+</section>
+
+<section class="promo-section">
+  <div class="container">
+    <div class="promo">
+      <div><span class="section-eyebrow">RYU XP COLLECTION</span><h2>Express yourself<br>in every message.</h2><p>Find stickers that match your personality.</p></div>
+      <a href="/product" class="promo-button">Explore Collection ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="container about-content">
+    <span class="section-eyebrow">ABOUT US</span>
+    <h2>Creativity in every sticker.</h2>
+    <p>LINE Sticker by Ryu XP is a creative sticker collection designed to make everyday conversations more expressive and enjoyable.</p>
+    <a href="/product" class="text-link">Discover our collection ↗</a>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-content">
+    <a href="/" class="brand"><span class="brand-icon">R</span><span>LINE Sticker <strong>by Ryu XP</strong></span></a>
+    <p>© <span id="year"></span> Ryu XP. All rights reserved.</p>
+    <a href="/product">Sticker Store ↗</a>
+  </div>
+</footer>
+
+<script>
+(async function(){
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const container = document.getElementById("featured-products");
+
+  try {
+    const response = await fetch("/config.json", {cache:"no-store"});
+    if (!response.ok) throw new Error("Could not load config.json");
+
+    const config = await response.json();
+    const products = (config.products || []).filter(p => p.featured);
+
+    if (!products.length) {
+      container.innerHTML = "<p>No featured stickers yet.</p>";
+      return;
+    }
+
+    container.innerHTML = products.map(p => `
+      <article class="product-card">
+        <a class="product-card-button" href="/product#${encodeURIComponent(p.id)}">
+          <div class="product-card-image">
+            <img src="${p.image}" alt="${p.name}" loading="lazy">
+          </div>
+          <div class="product-card-info">
+            <span class="product-status ${p.status === "coming-soon" ? "coming-soon" : ""}">
+              ${p.status === "available" ? "Available" : "Coming Soon"}
+            </span>
+            <h3>${escapeHTML(p.name)}</h3>
+            <p>${escapeHTML(p.price)}</p>
+            <span class="product-card-more">View Details ↗</span>
+          </div>
+        </a>
+      </article>
+    `).join("");
+  } catch(error) {
+    container.innerHTML = "<p>Unable to load products. Please try again later.</p>";
+    console.error(error);
+  }
+
+  function escapeHTML(value="") {
+    return String(value).replace(/[&<>"']/g, c => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    })[c]);
+  }
+})();
+</script>
+</body>
+</html>
