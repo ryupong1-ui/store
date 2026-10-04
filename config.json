@@ -30,6 +30,18 @@
       "contactUrl": "mailto:store@ryuxp.online"
     },
     {
+      "id": "somjai",
+      "name": "Somjai Love",
+      "description": "Create by Ryu XP",
+      "image": "/images/",
+      "price": "฿35",
+      "stickers": 32,
+      "status": "coming-soom",
+      "featured": true,
+      "buyUrl": "https://line.me/S/sticker/37051637?_from=lcm",
+      "contactUrl": "mailto:store@ryuxp.online"
+    },
+    {
       "id": "SPG",
       "name": "SPG Sticker by Ryu XP",
       "description": "Create by Ryu XP | Ryu XP X Speedgas",
