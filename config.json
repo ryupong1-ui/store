@@ -30,6 +30,18 @@
       "contactUrl": "mailto:store@ryuxp.online"
     },
     {
+      "id": "ari",
+      "name": "สติกเกอร์อารีย์",
+      "description": "Create by Ryu XP",
+      "image": "/images/8906CD20-BD3A-4499-8B89-1D0D9BCFB9A2.png",
+      "price": "฿35",
+      "stickers": 24,
+      "status": "coming-soon",
+      "featured": true,
+      "buyUrl": "https://line.me/S/sticker/37131619?_from=lcm",
+      "contactUrl": "mailto:store@ryuxp.online"
+    },
+    {
       "id": "somjai",
       "name": "สมใจ ส่งใจให้เธอ",
       "description": "Create by Ryu XP",
